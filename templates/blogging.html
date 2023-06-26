@@ -1,0 +1,37 @@
+{% import "bootstrap/wtf.html" as wtf%}
+
+<!-- Page Head-->
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header class="masthead img" style="background-image: url({{ url_for('static', filename='/assets/img/mining.jpg') }})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h2>Welcome {{name}}</h2>
+                    {% if is_edit: %}
+                    <span class="subheading"><b>You can start purifying your diamond 💎</b></span>
+                    {% else: %}
+                    <span class="subheading"><b>You can start mining and adding your new diamond 💎</b></span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-10 col-xl-8">
+                {{ ckeditor.load(pkg_type="standard") }}
+                {{ ckeditor.config() }}
+                {{ wtf.quick_form(bform, novalidate=True)}}
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer-->
+{% include 'footer.html' %}

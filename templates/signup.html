@@ -1,0 +1,45 @@
+{% import "bootstrap/wtf.html" as wtf%}
+
+<!-- Page Head-->
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header class="masthead img" style="background-image: url({{ url_for('static', filename='/assets/img/diamond_002.jpg') }})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-10 col-xl-10">
+                <div class="page-heading">
+                    {% if msg_sent: %}
+                        <h2>Congrats {{username}}, you have signed up successfully!</h2>
+                    {%else:%}
+                        <h1>Sign up</h1>
+                        <span class="subheading">Input your sign up information below. </span><img src="{{ url_for('static', filename='/assets/img/smile.png') }}" height="30">
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="my-5">
+                   {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                         {% for message in messages %}
+                            <p class=flashes>{{ message }}</p>
+                         {% endfor %}
+                      {% endif %}
+                   {% endwith %}
+                {{ wtf.quick_form(form, novalidate=True) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer-->
+{% include 'footer.html' %}

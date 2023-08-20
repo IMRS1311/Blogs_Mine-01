@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Morse Code Translator</title>
+        <link rel="icon" href="static/images/favicon.ico">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat:ital@1&family=Sacramento&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="static/css/styles.css">
+        <script src="path/to/bootstrap.min.js"></script>
+
+    </head>
+    <style>
+    </style>
+    <body class="translator-body h-100 text-center text-bg-dark">
+
+        <div class="header-container container-fluid">
+            <div class="row header-row pt-2">
+
+                <div class="col-md-6 col-sm-12">
+                    <h3 class="float-md-start cmb-0">M<span style="font-size: 1rem">ORSE</span></h3>
+                </div>
+
+                <div class="d-flex justify-content-between col-md-6 col-sm-12 ">
+                    <p><a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="index.html"><u>Home</u></a></p>
+                    <p><a class="nav-link fw-bold py-1 px-0" href="#">Translator</a></p>
+                    <p><a class="nav-link fw-bold py-1 px-0" href="contact.html#">Contact</a></p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container-fluid translator-container h-100 m-1">
+
+            <div class="row title-row w-100">
+                <h2 class="title-text my-4">Translate Text To Morse</h2>
+            </div>
+
+            <div class="row translator-row">
+                <form id="textForm" class="form d-flex flex-column flex-lg-row justify-content-lg-between">
+                    <div class="text-box col-lg-5 col-xl-5 mb-3">
+                        <label for="userInput" class="my-3 text-label">Input Your Text:</label><br>
+                        <textarea id="userInput" name="userInput" class="text-input px-3" rows="10" cols="80" required> </textarea><br>
+                    </div>
+                    <div class="col-lg-2 col-xl-2 mb-3">
+                        <button class="btn btn-default view_post btn-primary btn-lg my-3" onclick="translateToMorseCode()">Coding</button>
+                    </div>
+                     <div class="col-lg-5 col-xl-5 mb-3">
+                        <label for="morseCodeOutput" class="my-3 output-label">Morse code Translation:</label><br>
+                        <textarea id="morseCodeOutput" class="text-output px-3" rows="10" cols="80" readonly></textarea><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container-fluid line-container d-flex m-1">
+            <div class="line-middle w-100 col-12 py-3"><hr class="line"></div>
+        </div>
+
+        <div class="container-fluid decoder-container h-100 m-1">
+
+            <div class="row title-row w-100">
+                <h2 class="title-text my-4">Decode Morse To Text</h2>
+            </div>
+
+            <div class="row decoder-row">
+                <form id="codeForm" class="form d-flex flex-column flex-lg-row justify-content-lg-between">
+                    <div class="morse-box col-lg-5 col-xl-5 mb-3">
+                        <label for="codeInput" class="my-3 text-label">Input Morse Code:</label><br>
+                        <textarea id="codeInput" name="codeInput" class="text-input px-3" rows="10" cols="80" required> </textarea><br>
+                    </div>
+                    <div class="col-lg-2 col-xl-2 mb-3">
+                        <button class="btn btn-default view_post btn-primary btn-lg my-3" onclick="translateToText()">Decoding</button>
+                    </div>
+                     <div class="col-lg-5 col-xl-5 mb-3">
+                        <label for="textOutput" class="my-3 output-label">Text Translation:</label><br>
+                        <textarea id="textOutput" class="text-output px-3" rows="10" cols="80" readonly></textarea><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer class="footer-area text-white-50 mt-4">
+            <p class="footer-text">Copyright &copy; Morse Code Translation 2023, by <span class="text-white">E.M.R.S</span></p>
+        </footer>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <script>
+        var storedInputValue = "";
+
+        document.getElementById("textForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            storedInputValue = document.getElementById("userInput").value;
+
+            var displaySpan = document.getElementById("displayValue");
+            displaySpan.textContent = storedInputValue;
+        });
+
+        function translateToMorseCode() {
+            storedInputValue = document.getElementById("userInput").value;
+            console.log("Button clicked");
+            var morseCodeMap = {
+                'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+                'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+                'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..',
+                '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...',
+                '8': '---..', '9': '----.',
+                ' ': ' ',
+                '.': '.-.-.-', ',': '--..--', '?': '..--..', '\'': '.----.', '!': '-.-.--',
+                '/': '-..-.', '(': '-.--.', ')': '-.--.-', '&': '.-...', ':': '---...', ';': '-.-.-.',
+                '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-', '"': '.-..-.', '$': '...-..-',
+                '@': '.--.-.', '¿': '..-.-', '¡': '--...-',
+            };
+            var translatedText = '';
+
+            var inputText = storedInputValue.toUpperCase();
+
+            for (var i = 0; i < inputText.length; i++) {
+                var char = inputText[i];
+                if (char in morseCodeMap) {
+                    translatedText += morseCodeMap[char] + ' ';
+                } else {
+                    translatedText += char + ' ';
+                }
+            }
+
+            var morseCodeOutput = document.getElementById("morseCodeOutput");
+            morseCodeOutput.value = translatedText;
+        }
+    </script>
+
+    <script>
+        var storedCodeValue = "";
+
+        document.getElementById("codeForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            storedCodeValue = document.getElementById("codeInput").value;
+
+            var displaySpan = document.getElementById("displayValue");
+            displaySpan.textContent = storedCodeValue;
+        });
+
+
+        function translateToText() {
+            storedCodeValue = document.getElementById("codeInput").value;
+            console.log("Button clicked");
+            var textCodeMap = {
+                '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I',
+                '.---': 'J',
+                '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S',
+                '-': 'T',
+                '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y', '--..': 'Z',
+                '-----': '0', '.----': '1', '..---': '2', '...--': '3', '....-': '4', '.....': '5', '-....': '6', '--...': '7',
+                '---..': '8', '----.': '9',
+                ' ': ' ',
+                '.-.-.-': '.', '--..--': ',', '..--..': '?', '.----.': '\'', '-.-.--': '!',
+                '-..-.': '/', '-.--.': '(', '-.--.-': ')', '.-...': '&', '---...': ':', '-.-.-.': ';',
+                '-...-': '=', '.-.-.': '+', '-....-': '-', '..--.-': '_', '.-..-.': '"', '...-..-': '$',
+                '.--.-.': '@', '..-.-': '¿', '--...-': '¡',
+            };
+            var decodedText = '';
+
+            var inputCode = storedCodeValue.trim().split(' ');
+
+            for (var i = 0; i < inputCode.length; i++) {
+                var code = inputCode[i];
+                if (code in textCodeMap) {
+                    decodedText += textCodeMap[code];
+                } else {
+                    decodedText += code + ' ';
+                }
+            }
+
+            var textOutput = document.getElementById("textOutput");
+            textOutput.value = decodedText.toLowerCase().replace(/(?:^|[.!?])\s*(\w)/g, char => char.toUpperCase());
+
+            }
+
+    </script>
+    </body>
+</html>
